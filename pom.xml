@@ -6,7 +6,7 @@
 
     <groupId>com.yicenyun.casdoor</groupId>
     <artifactId>casdoor-client</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <name>Casdoor Client</name>
     <description>Java client for Casdoor.</description>
