@@ -1,2 +1,3 @@
 # casdoor-client
-A new java client for casdoor.
+
+`casdoor-client` is new java client for casdoor.
