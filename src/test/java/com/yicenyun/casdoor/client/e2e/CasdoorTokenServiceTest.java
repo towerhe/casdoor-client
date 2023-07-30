@@ -4,7 +4,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Assert;
@@ -12,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.yicenyun.casdoor.client.CasdoorClient;
+import com.yicenyun.casdoor.client.command.QueryCommand;
 import com.yicenyun.casdoor.client.entity.CasdoorToken;
 import com.yicenyun.casdoor.client.response.CasdoorActionResponse;
 import com.yicenyun.casdoor.client.response.CasdoorResponse;
@@ -51,9 +51,9 @@ public class CasdoorTokenServiceTest {
     }
 
     @Test
-    public void testGetTokens() throws IOException {
+    public void testQueryTokens() throws IOException {
         CasdoorResponse<List<CasdoorToken>, Integer> response = subject
-                .getPaginationTokens(1, 10, new HashMap<>()).execute().body();
+                .getTokens(new QueryCommand.Builder().page(1, 10).build()).execute().body();
         assertFalse(response.getData().isEmpty());
         assertTrue(response.getData2() > 0);
     }

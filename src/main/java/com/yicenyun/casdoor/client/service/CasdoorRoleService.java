@@ -13,10 +13,10 @@
 package com.yicenyun.casdoor.client.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.yicenyun.casdoor.client.annotation.CasdoorId;
 import com.yicenyun.casdoor.client.annotation.RequireOwnerInQuery;
+import com.yicenyun.casdoor.client.command.QueryCommand;
 import com.yicenyun.casdoor.client.entity.CasdoorRole;
 import com.yicenyun.casdoor.client.response.CasdoorActionResponse;
 import com.yicenyun.casdoor.client.response.CasdoorResponse;
@@ -25,8 +25,6 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
-import retrofit2.http.QueryMap;
 import retrofit2.http.Tag;
 
 public interface CasdoorRoleService {
@@ -40,8 +38,7 @@ public interface CasdoorRoleService {
 
     @GET("get-roles")
     @RequireOwnerInQuery
-    Call<CasdoorResponse<List<CasdoorRole>, Integer>> getPaginationRoles(
-            @Query("p") int p, @Query("pageSize") int pageSize, @QueryMap Map<String, String> query);
+    Call<CasdoorResponse<List<CasdoorRole>, Integer>> getRoles(@Tag QueryCommand command);
 
     @POST("add-role")
     Call<CasdoorActionResponse> addRole(@Body CasdoorRole role);

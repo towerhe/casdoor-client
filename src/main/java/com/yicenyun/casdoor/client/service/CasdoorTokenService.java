@@ -13,9 +13,9 @@
 package com.yicenyun.casdoor.client.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.yicenyun.casdoor.client.annotation.RequireOwnerInQuery;
+import com.yicenyun.casdoor.client.command.QueryCommand;
 import com.yicenyun.casdoor.client.entity.CasdoorToken;
 import com.yicenyun.casdoor.client.response.CasdoorActionResponse;
 import com.yicenyun.casdoor.client.response.CasdoorResponse;
@@ -24,8 +24,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
-import retrofit2.http.QueryMap;
+import retrofit2.http.Tag;
 
 public interface CasdoorTokenService {
     @GET("get-tokens")
@@ -34,8 +33,7 @@ public interface CasdoorTokenService {
 
     @GET("get-tokens")
     @RequireOwnerInQuery
-    Call<CasdoorResponse<List<CasdoorToken>, Integer>> getPaginationTokens(@Query("p") int page,
-            @Query("pageSize") int pageSize, @QueryMap Map<String, Object> query);
+    Call<CasdoorResponse<List<CasdoorToken>, Integer>> getTokens(@Tag QueryCommand command);
 
     @POST("delete-token")
     Call<CasdoorActionResponse> deleteToken(@Body CasdoorToken token);

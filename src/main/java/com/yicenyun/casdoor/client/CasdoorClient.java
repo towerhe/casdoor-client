@@ -8,6 +8,7 @@ import com.yicenyun.casdoor.client.config.CasdoorConfig;
 import com.yicenyun.casdoor.client.interceptor.AuthenticationInterceptor;
 import com.yicenyun.casdoor.client.interceptor.CasdoorIdInterceptor;
 import com.yicenyun.casdoor.client.interceptor.RequireOwnerInQueryInterceptor;
+import com.yicenyun.casdoor.client.interceptor.QueryCommandInterceptor;
 import com.yicenyun.casdoor.client.service.CasdoorAuthService;
 import com.yicenyun.casdoor.client.service.CasdoorEnforcerService;
 
@@ -52,7 +53,8 @@ public final class CasdoorClient {
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder()
                 .addInterceptor(new AuthenticationInterceptor(config.getClientId(), config.getClientSecret()))
                 .addInterceptor(new RequireOwnerInQueryInterceptor(config.getOrganizationName()))
-                .addInterceptor(new CasdoorIdInterceptor(config.getOrganizationName()));
+                .addInterceptor(new CasdoorIdInterceptor(config.getOrganizationName()))
+                .addInterceptor(new QueryCommandInterceptor());
         if (logLevel != null) {
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
             loggingInterceptor.setLevel(logLevel);

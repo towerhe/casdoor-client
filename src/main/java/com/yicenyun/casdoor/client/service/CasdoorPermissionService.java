@@ -13,10 +13,10 @@
 package com.yicenyun.casdoor.client.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.yicenyun.casdoor.client.annotation.CasdoorId;
 import com.yicenyun.casdoor.client.annotation.RequireOwnerInQuery;
+import com.yicenyun.casdoor.client.command.QueryCommand;
 import com.yicenyun.casdoor.client.entity.CasdoorPermission;
 import com.yicenyun.casdoor.client.response.CasdoorActionResponse;
 import com.yicenyun.casdoor.client.response.CasdoorResponse;
@@ -26,7 +26,6 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
-import retrofit2.http.QueryMap;
 import retrofit2.http.Tag;
 
 public interface CasdoorPermissionService {
@@ -38,14 +37,13 @@ public interface CasdoorPermissionService {
         @RequireOwnerInQuery
         Call<CasdoorResponse<List<CasdoorPermission>, Object>> getPermissions();
 
+        @GET("get-permissions")
+        @RequireOwnerInQuery
+        Call<CasdoorResponse<List<CasdoorPermission>, Integer>> getPermissions(@Tag QueryCommand command);
+
         @GET("get-permissions-by-role")
         Call<CasdoorResponse<List<CasdoorPermission>, Integer>> getPermissionsByRole(@CasdoorId @Tag String name,
                         @Query("owner") String owner);
-
-        @GET("get-permissions")
-        @RequireOwnerInQuery
-        Call<CasdoorResponse<List<CasdoorPermission>, Integer>> getPaginationPermissions(
-                        @Query("p") int p, @Query("pageSize") int pageSize, @QueryMap Map<String, String> query);
 
         @POST("add-permission")
         Call<CasdoorActionResponse> addPermission(@Body CasdoorPermission permission);

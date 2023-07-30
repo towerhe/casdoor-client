@@ -6,14 +6,13 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.yicenyun.casdoor.client.CasdoorClient;
+import com.yicenyun.casdoor.client.command.QueryCommand;
 import com.yicenyun.casdoor.client.entity.CasdoorRole;
 import com.yicenyun.casdoor.client.response.CasdoorActionResponse;
 import com.yicenyun.casdoor.client.response.CasdoorResponse;
@@ -61,9 +60,9 @@ public class CasdoorRoleServiceTest {
     }
 
     @Test
-    public void testGetPaginationRoles() throws IOException {
-        Map<String, String> queryMap = new HashMap<>();
-        CasdoorResponse<List<CasdoorRole>, Integer> response = subject.getPaginationRoles(1, 10, queryMap)
+    public void testQueryRoles() throws IOException {
+        CasdoorResponse<List<CasdoorRole>, Integer> response = subject
+                .getRoles(new QueryCommand.Builder().page(1, 10).build())
                 .execute().body();
 
         List<CasdoorRole> roles = response.getData();

@@ -5,15 +5,14 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.yicenyun.casdoor.client.CasdoorClient;
+import com.yicenyun.casdoor.client.command.QueryCommand;
 import com.yicenyun.casdoor.client.entity.CasdoorPermission;
 import com.yicenyun.casdoor.client.response.CasdoorActionResponse;
 import com.yicenyun.casdoor.client.response.CasdoorResponse;
@@ -62,10 +61,9 @@ public class CasdoorPermissionServiceTest {
     }
 
     @Test
-    public void testGetPaginationPermissions() throws IOException {
-        Map<String, String> queryMap = new HashMap<>();
+    public void testQueryPermissions() throws IOException {
         CasdoorResponse<List<CasdoorPermission>, Integer> response = subject
-                .getPaginationPermissions(1, 10, queryMap).execute().body();
+                .getPermissions(new QueryCommand.Builder().page(1, 10).build()).execute().body();
         assertNotNull(response);
 
         List<CasdoorPermission> permissions = response.getData();
