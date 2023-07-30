@@ -1,0 +1,417 @@
+{
+  "status": "ok",
+  "msg": "",
+  "sub": "",
+  "name": "",
+  "data": [
+    {
+      "owner": "admin",
+      "name": "maoguang",
+      "createdTime": "2023-07-30T11:45:17+08:00",
+      "displayName": "懋光",
+      "websiteUrl": "https://www.maoguang.cn",
+      "favicon": "http://localhost:22502/images/favicon.ico",
+      "passwordType": "plain",
+      "passwordSalt": "",
+      "passwordOptions": ["AtLeast6"],
+      "countryCodes": ["CN"],
+      "defaultAvatar": "http://localhost:22502/images/default-avatar.svg",
+      "defaultApplication": "",
+      "tags": [],
+      "languages": ["zh"],
+      "themeData": null,
+      "masterPassword": "",
+      "initScore": 2000,
+      "enableSoftDeletion": false,
+      "isProfilePublic": true,
+      "mfaItems": null,
+      "accountItems": [
+        {
+          "name": "Organization",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Admin"
+        },
+        {
+          "name": "ID",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Immutable"
+        },
+        {
+          "name": "Name",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Admin"
+        },
+        {
+          "name": "Display name",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "Avatar",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "User type",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Admin"
+        },
+        {
+          "name": "Password",
+          "visible": true,
+          "viewRule": "Self",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "Email",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "Phone",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "Country code",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Admin"
+        },
+        {
+          "name": "Country/Region",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "Location",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "Affiliation",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "Title",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "Homepage",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "Bio",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "Tag",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Admin"
+        },
+        {
+          "name": "Signup application",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Admin"
+        },
+        {
+          "name": "Roles",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Immutable"
+        },
+        {
+          "name": "Permissions",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Immutable"
+        },
+        {
+          "name": "Groups",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Admin"
+        },
+        {
+          "name": "3rd-party logins",
+          "visible": true,
+          "viewRule": "Self",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "Properties",
+          "visible": false,
+          "viewRule": "Admin",
+          "modifyRule": "Admin"
+        },
+        {
+          "name": "Is admin",
+          "visible": true,
+          "viewRule": "Admin",
+          "modifyRule": "Admin"
+        },
+        {
+          "name": "Is global admin",
+          "visible": true,
+          "viewRule": "Admin",
+          "modifyRule": "Admin"
+        },
+        {
+          "name": "Is forbidden",
+          "visible": true,
+          "viewRule": "Admin",
+          "modifyRule": "Admin"
+        },
+        {
+          "name": "Is deleted",
+          "visible": true,
+          "viewRule": "Admin",
+          "modifyRule": "Admin"
+        },
+        {
+          "name": "Multi-factor authentication",
+          "visible": true,
+          "viewRule": "Self",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "WebAuthn credentials",
+          "visible": true,
+          "viewRule": "Self",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "Managed accounts",
+          "visible": true,
+          "viewRule": "Self",
+          "modifyRule": "Self"
+        }
+      ]
+    },
+    {
+      "owner": "admin",
+      "name": "built-in",
+      "createdTime": "2023-07-30T11:45:16+08:00",
+      "displayName": "内置组织",
+      "websiteUrl": "https://iam.maoguang.tech",
+      "favicon": "http://localhost:22502/images/favicon.ico",
+      "passwordType": "plain",
+      "passwordSalt": "",
+      "passwordOptions": ["AtLeast6"],
+      "countryCodes": ["CN"],
+      "defaultAvatar": "http://localhost:22502/images/default-avatar.svg",
+      "defaultApplication": "",
+      "tags": [],
+      "languages": ["zh"],
+      "themeData": null,
+      "masterPassword": "",
+      "initScore": 2000,
+      "enableSoftDeletion": false,
+      "isProfilePublic": false,
+      "mfaItems": null,
+      "accountItems": [
+        {
+          "name": "Organization",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Admin"
+        },
+        {
+          "name": "ID",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Immutable"
+        },
+        {
+          "name": "Name",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Admin"
+        },
+        {
+          "name": "Display name",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "Avatar",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "User type",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Admin"
+        },
+        {
+          "name": "Password",
+          "visible": true,
+          "viewRule": "Self",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "Email",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "Phone",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "Country code",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Admin"
+        },
+        {
+          "name": "Country/Region",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "Location",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "Affiliation",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "Title",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "Homepage",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "Bio",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "Tag",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Admin"
+        },
+        {
+          "name": "Signup application",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Admin"
+        },
+        {
+          "name": "Roles",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Immutable"
+        },
+        {
+          "name": "Permissions",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Immutable"
+        },
+        {
+          "name": "Groups",
+          "visible": true,
+          "viewRule": "Public",
+          "modifyRule": "Admin"
+        },
+        {
+          "name": "3rd-party logins",
+          "visible": true,
+          "viewRule": "Self",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "Properties",
+          "visible": false,
+          "viewRule": "Admin",
+          "modifyRule": "Admin"
+        },
+        {
+          "name": "Is admin",
+          "visible": true,
+          "viewRule": "Admin",
+          "modifyRule": "Admin"
+        },
+        {
+          "name": "Is global admin",
+          "visible": true,
+          "viewRule": "Admin",
+          "modifyRule": "Admin"
+        },
+        {
+          "name": "Is forbidden",
+          "visible": true,
+          "viewRule": "Admin",
+          "modifyRule": "Admin"
+        },
+        {
+          "name": "Is deleted",
+          "visible": true,
+          "viewRule": "Admin",
+          "modifyRule": "Admin"
+        },
+        {
+          "name": "Multi-factor authentication",
+          "visible": true,
+          "viewRule": "Self",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "WebAuthn credentials",
+          "visible": true,
+          "viewRule": "Self",
+          "modifyRule": "Self"
+        },
+        {
+          "name": "Managed accounts",
+          "visible": true,
+          "viewRule": "Self",
+          "modifyRule": "Self"
+        }
+      ]
+    }
+  ],
+  "data2": 2
+}

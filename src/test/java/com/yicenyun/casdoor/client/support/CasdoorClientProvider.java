@@ -14,11 +14,15 @@ public class CasdoorClientProvider {
     }
 
     public static CasdoorClient get() {
+        return get("http://localhost:8000");
+    }
+
+    public static CasdoorClient get(String endpoint) {
         return new CasdoorClient.Builder()
-                .endpoint("http://localhost:8000")
+                .endpoint(endpoint)
                 .baseUri("api")
-                .clientId("6368a1041b46e5d156ab")
-                .clientSecret("09764d62a75a5b644c449ba42c44062e14224ba5")
+                .clientId("32429b048ffbfc93cb99")
+                .clientSecret("4e191daebd5e4616139a2aa7ea1f1d86d48e40ec")
                 .certificate(getCertificate())
                 .organizationName("built-in")
                 .applicationName("app-built-in")
