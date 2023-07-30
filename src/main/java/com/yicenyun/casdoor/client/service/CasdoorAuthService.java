@@ -36,8 +36,8 @@ import org.apache.oltu.oauth2.common.message.types.GrantType;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.JWSVerifier;
-import com.nimbusds.jose.Payload;
 import com.nimbusds.jose.crypto.RSASSAVerifier;
+import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 import com.yicenyun.casdoor.client.config.CasdoorConfig;
 import com.yicenyun.casdoor.client.entity.CasdoorUser;
@@ -60,7 +60,8 @@ public class CasdoorAuthService extends CasdoorService {
                     .setCode(code)
                     .buildQueryMessage();
             OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
-            OAuthJSONAccessTokenResponse oAuthResponse = oAuthClient.accessToken(oAuthClientRequest, OAuth.HttpMethod.POST);
+            OAuthJSONAccessTokenResponse oAuthResponse = oAuthClient.accessToken(oAuthClientRequest,
+                    OAuth.HttpMethod.POST);
             return oAuthResponse.getAccessToken();
         } catch (OAuthSystemException | OAuthProblemException e) {
             throw new CasdoorAuthException("Cannot get OAuth token.", e);
@@ -78,7 +79,8 @@ public class CasdoorAuthService extends CasdoorService {
         // verify the jwt public key
         try {
             CertificateFactory cf = CertificateFactory.getInstance("X.509");
-            X509Certificate cert = (X509Certificate) cf.generateCertificate(new ByteArrayInputStream(casdoorConfig.getCertificate().getBytes()));
+            X509Certificate cert = (X509Certificate) cf
+                    .generateCertificate(new ByteArrayInputStream(casdoorConfig.getCertificate().getBytes()));
             RSAPublicKey publicKey = (RSAPublicKey) cert.getPublicKey();
             JWSVerifier verifier = new RSASSAVerifier(publicKey);
             boolean verify = parseJwt.verify(verifier);
@@ -89,12 +91,18 @@ public class CasdoorAuthService extends CasdoorService {
             throw new CasdoorAuthException("Cannot verify signature.", e);
         }
 
-        // convert to CasdoorUser
+        // read "access_token" from payload and convert to CasdoorUser
         try {
-            Payload payloadJson = parseJwt.getPayload();
-            return objectMapper.readValue(payloadJson.toString(), CasdoorUser.class);
-        } catch (JsonProcessingException e) {
-            throw new CasdoorAuthException("Cannot convert claims to CasdoorUser", e);
+            JWTClaimsSet claimsSet = parseJwt.getJWTClaimsSet();
+            String accessToken = claimsSet.getStringClaim("access_token");
+
+            if (accessToken == null || accessToken.isEmpty()) {
+                throw new CasdoorAuthException("Access token not found in JWT payload.");
+            }
+
+            return objectMapper.readValue(claimsSet.toString(), CasdoorUser.class);
+        } catch (JsonProcessingException | java.text.ParseException e) {
+            throw new CasdoorAuthException("Cannot read access token from JWT payload.", e);
         }
     }
 
@@ -105,7 +113,8 @@ public class CasdoorAuthService extends CasdoorService {
     public String getSigninUrl(String redirectUrl, String state) {
         String scope = "read";
         try {
-            return String.format("%s/login/oauth/authorize?client_id=%s&response_type=code&redirect_uri=%s&scope=%s&state=%s",
+            return String.format(
+                    "%s/login/oauth/authorize?client_id=%s&response_type=code&redirect_uri=%s&scope=%s&state=%s",
                     casdoorConfig.getEndpoint(), casdoorConfig.getClientId(),
                     URLEncoder.encode(redirectUrl, StandardCharsets.UTF_8.toString()),
                     scope, state);
@@ -136,12 +145,16 @@ public class CasdoorAuthService extends CasdoorService {
 
     public String getUserProfileUrl(String username, String accessToken, String returnUrl) {
         LinkedHashMap<String, Serializable> params = new LinkedHashMap<>();
-        if (accessToken != null && accessToken.trim().length() > 0) params.put("access_token", accessToken);
-        if (returnUrl != null && returnUrl.trim().length() > 0) params.put("returnUrl", returnUrl);
+        if (accessToken != null && accessToken.trim().length() > 0)
+            params.put("access_token", accessToken);
+        if (returnUrl != null && returnUrl.trim().length() > 0)
+            params.put("returnUrl", returnUrl);
         if (username == null || username.trim().length() == 0) {
-            return String.format("%s/account%s", casdoorConfig.getEndpoint(), params.size() == 0 ? "" : "?" + QueryUtils.buildQuery(params));
+            return String.format("%s/account%s", casdoorConfig.getEndpoint(),
+                    params.size() == 0 ? "" : "?" + QueryUtils.buildQuery(params));
         } else {
-            return String.format("%s/users/%s/%s%s", casdoorConfig.getEndpoint(), casdoorConfig.getOrganizationName(), username, params.size() == 0 ? "" : "?" + QueryUtils.buildQuery(params));
+            return String.format("%s/users/%s/%s%s", casdoorConfig.getEndpoint(), casdoorConfig.getOrganizationName(),
+                    username, params.size() == 0 ? "" : "?" + QueryUtils.buildQuery(params));
         }
     }
 
