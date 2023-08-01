@@ -153,7 +153,7 @@ public class CasdoorGroup {
 
     @Override
     public String toString() {
-        return "Organization{" +
+        return "Group{" +
                 "owner='" + owner + '\'' +
                 ", name='" + name + '\'' +
                 ", createdTime='" + createdTime + '\'' +
@@ -163,12 +163,12 @@ public class CasdoorGroup {
                 ", contactEmail='" + contactEmail + '\'' +
                 ", type='" + type + '\'' +
                 ", parentId='" + parentId + '\'' +
-                ", isTopGroup='" + isTopGroup + '\'' +
-                ", users='" + users + '\'' +
+                ", isTopGroup=" + isTopGroup +
+                ", users=" + users +
                 ", title='" + title + '\'' +
                 ", key='" + key + '\'' +
-                ", children='" + children + '\'' +
-                ", isEnabled='" + isEnabled + '\'' +
+                ", children=" + children +
+                ", isEnabled=" + isEnabled +
                 '}';
     }
 }
