@@ -71,8 +71,8 @@ public final class CasdoorClient {
 
     public static final class Builder {
 
+        private String baseUri = "api";
         private String endpoint;
-        private String baseUri;
         private String clientId;
         private String clientSecret;
         private String certificate;
@@ -80,41 +80,73 @@ public final class CasdoorClient {
         private String applicationName;
         private Level logLevel;
 
+        /**
+         * @param endpoint entry url of casdoor such as: http://localhost:8000
+         * @return an instance of Builder
+         */
         public Builder endpoint(String endpoint) {
             this.endpoint = endpoint;
             return this;
         }
 
+        /**
+         * @param baseUri base uri of RESTful APIs, default value is "api"
+         * @return an instance of Builder
+         */
         public Builder baseUri(String baseUri) {
             this.baseUri = baseUri;
             return this;
         }
 
+        /**
+         * @param clientId clientId of the registered application in casdoor
+         * @return an instance of Builder
+         */
         public Builder clientId(String clientId) {
             this.clientId = clientId;
             return this;
         }
 
+        /**
+         * @param clientSecret clientSecret of the registered application in casdoor
+         * @return an instance of Builder
+         */
         public Builder clientSecret(String clientSecret) {
             this.clientSecret = clientSecret;
             return this;
         }
 
+        /**
+         * @param certificate certificate of the registered application in casdoor
+         * @return an instance of Builder
+         */
         public Builder certificate(String certificate) {
             this.certificate = certificate;
             return this;
         }
 
+        /**
+         * @param organizationName organization name of the registered application in casdoor
+         * @return an instance of Builder
+         */
         public Builder organizationName(String organizationName) {
             this.organizationName = organizationName;
             return this;
         }
 
+        /**
+         * @param applicationName name of the registered application in casdoor
+         * @return an instance of Builder
+         */
         public Builder applicationName(String applicationName) {
             this.applicationName = applicationName;
             return this;
         }
 
+        /**
+         * @param level log level of okhttp client
+         * @return an instance of Builder
+         */
         public Builder log(Level level) {
             this.logLevel = level;
             return this;
