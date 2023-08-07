@@ -41,7 +41,9 @@ public class CasdoorIdInterceptor implements Interceptor {
         OptionalInt idx = getCasdoorIdIndex(invocation);
         if (hasCasdoorId(idx)) {
             HttpUrl url = original.url().newBuilder()
-                    .addQueryParameter("id", String.format("%s/%s", owner, invocation.arguments().get(idx.getAsInt())))
+                    .addQueryParameter(
+                            getCasdoorIdValue(invocation, idx.getAsInt()),
+                            String.format("%s/%s", owner, invocation.arguments().get(idx.getAsInt())))
                     .build();
             return chain.proceed(original.newBuilder().url(url).build());
         }
@@ -57,5 +59,9 @@ public class CasdoorIdInterceptor implements Interceptor {
 
     private boolean hasCasdoorId(OptionalInt idx) {
         return owner != null && owner.length() > 0 && idx.isPresent();
+    }
+
+    private String getCasdoorIdValue(Invocation invocation, int idx) {
+        return invocation.method().getParameters()[idx].getAnnotation(CasdoorId.class).value();
     }
 }
