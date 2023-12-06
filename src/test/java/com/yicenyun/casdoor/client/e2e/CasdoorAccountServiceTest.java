@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.yicenyun.casdoor.client.CasdoorClient;
-import com.yicenyun.casdoor.client.command.LogoutQueryCommand;
 import com.yicenyun.casdoor.client.entity.CasdoorOrganization;
 import com.yicenyun.casdoor.client.entity.CasdoorUser;
 import com.yicenyun.casdoor.client.response.CasdoorActionResponse;
