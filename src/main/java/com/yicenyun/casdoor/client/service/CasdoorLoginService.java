@@ -10,6 +10,7 @@ import com.yicenyun.casdoor.client.response.CasdoorResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
 public interface CasdoorLoginService {
@@ -18,4 +19,14 @@ public interface CasdoorLoginService {
 
     @POST("logout")
     Call<CasdoorActionResponse> logout(@QueryMap Map<String, String> query);
+
+    @POST("logout")
+    Call<CasdoorActionResponse> logout(@Query("id_token_hint") String token);
+
+    @POST("logout")
+    Call<CasdoorActionResponse> logout(@Query("id_token_hint") String token, @Query("state") String state);
+
+    @POST("logout")
+    Call<CasdoorActionResponse> logout(@Query("id_token_hint") String token, @Query("post_logout_redirect_uri") String postLogoutRedirectUri, @Query("state") String state);
+
 }
