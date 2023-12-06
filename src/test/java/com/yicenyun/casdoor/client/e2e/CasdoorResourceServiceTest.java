@@ -1,11 +1,12 @@
 package com.yicenyun.casdoor.client.e2e;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.io.File;
 import java.io.IOException;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.yicenyun.casdoor.client.CasdoorClient;
 import com.yicenyun.casdoor.client.entity.CasdoorResource;
@@ -22,7 +23,7 @@ public class CasdoorResourceServiceTest {
     private CasdoorClient client = CasdoorClientProvider.get();
     private CasdoorResourceService subject;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         subject = client.createService(CasdoorResourceService.class);
     }
@@ -39,9 +40,9 @@ public class CasdoorResourceServiceTest {
 
         CasdoorActionResponse response = subject.uploadResource(user, "app-built-in", tag, parent,
                 fullFilePath, filePart).execute().body();
-        Assert.assertEquals("ok", response.getStatus());
+        assertEquals("ok", response.getStatus());
 
         response = subject.deleteResource(new CasdoorResource("built-in", file.getName())).execute().body();
-        Assert.assertEquals("ok", response.getStatus());
+        assertEquals("ok", response.getStatus());
     }
 }

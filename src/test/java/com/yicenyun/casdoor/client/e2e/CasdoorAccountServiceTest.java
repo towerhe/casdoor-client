@@ -1,12 +1,15 @@
 package com.yicenyun.casdoor.client.e2e;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.io.IOException;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.yicenyun.casdoor.client.CasdoorClient;
+import com.yicenyun.casdoor.client.command.LogoutQueryCommand;
 import com.yicenyun.casdoor.client.entity.CasdoorOrganization;
 import com.yicenyun.casdoor.client.entity.CasdoorUser;
 import com.yicenyun.casdoor.client.response.CasdoorActionResponse;
@@ -18,7 +21,7 @@ public class CasdoorAccountServiceTest {
     private CasdoorClient client = CasdoorClientProvider.get();
     private CasdoorAccountService subject;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         subject = client.createService(CasdoorAccountService.class);
     }
@@ -28,14 +31,23 @@ public class CasdoorAccountServiceTest {
         CasdoorActionResponse response = subject
                 .setPassword("built-in", "admin", "12345678", "12345678")
                 .execute().body();
-        Assert.assertEquals("ok", response.getStatus());
+        assertEquals("ok", response.getStatus());
     }
 
     @Test
     public void getAccount() throws IOException {
         /* When */
         CasdoorResponse<CasdoorUser, CasdoorOrganization> response = subject
-                .getAccount("eyJhbGciOiJSUzI1NiIsImtpZCI6ImNlcnQtYnVpbHQtaW4iLCJ0eXAiOiJKV1QifQ." +
+                .getAccount(token())
+                .execute().body();
+        /* Then */
+        assertEquals("ok", response.getStatus());
+        assertNotNull(response.getData());
+        assertNotNull(response.getData2());
+    }
+
+    private String token() {
+        return "eyJhbGciOiJSUzI1NiIsImtpZCI6ImNlcnQtYnVpbHQtaW4iLCJ0eXAiOiJKV1QifQ." +
                         "eyJvd25lciI6InlpY2VueXVuIiwibmFtZSI6InljYWRtaW4iLCJjcmVhdGVkVGltZSI6IjIwMjMtMDctMjFUMDE6MDA6MDErM"
                         +
                         "Dg6MDAiLCJ1cGRhdGVkVGltZSI6IiIsImlkIjoiYmE3Mjk0N2QtZWEyYS00NjVhLWE0NGEtZGFlZTdhN2M2MWRkIiwidHlwZS"
@@ -84,11 +96,6 @@ public class CasdoorAccountServiceTest {
                         +
                         "AjQ-D82GmQNTQvUTMsBUxI5ZF0OgI3QxLgNav3OSwNSZ0Zf1-U49W5EtIt0BuuIQo_y0Y_KP-edO-M9NSdc9HfNS1n36PX0iG"
                         +
-                        "Q6OfkKwRSb_UEFh0WH0rINA0IFGOOQAF1YY")
-                .execute().body();
-        /* Then */
-        Assert.assertEquals("ok", response.getStatus());
-        Assert.assertNotNull(response.getData());
-        Assert.assertNotNull(response.getData2());
+                        "Q6OfkKwRSb_UEFh0WH0rINA0IFGOOQAF1YY";
     }
 }

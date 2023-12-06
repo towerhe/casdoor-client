@@ -1,12 +1,12 @@
 package com.yicenyun.casdoor.client.e2e;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.yicenyun.casdoor.client.CasdoorClient;
 import com.yicenyun.casdoor.client.service.CasdoorCasbinApiService;
@@ -17,7 +17,7 @@ public class CasdoorCasbinApiServiceTest {
     private CasdoorClient client = CasdoorClientProvider.get();
     private CasdoorCasbinApiService subject;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         subject = client.createService(CasdoorCasbinApiService.class);
     }

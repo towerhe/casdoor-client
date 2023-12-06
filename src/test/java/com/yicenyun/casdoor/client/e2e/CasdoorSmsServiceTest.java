@@ -1,11 +1,12 @@
 package com.yicenyun.casdoor.client.e2e;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.io.IOException;
 import java.util.Random;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.yicenyun.casdoor.client.CasdoorClient;
 import com.yicenyun.casdoor.client.command.SendSmsCommand;
@@ -17,7 +18,7 @@ public class CasdoorSmsServiceTest {
         private CasdoorClient client = CasdoorClientProvider.get();
     private CasdoorSmsService subject;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         subject = client.createService(CasdoorSmsService.class);
     }
@@ -26,7 +27,7 @@ public class CasdoorSmsServiceTest {
     public void testSendSms() throws IOException {
         String receiver = "";
         CasdoorActionResponse response = subject.sendSms(new SendSmsCommand("admin/" + randomCode(), receiver)).execute().body();
-        Assert.assertEquals("ok", response.getStatus());
+        assertEquals("ok", response.getStatus());
     }
 
     private static String randomCode() {

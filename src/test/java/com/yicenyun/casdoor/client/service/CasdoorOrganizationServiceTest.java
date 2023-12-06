@@ -1,12 +1,12 @@
 package com.yicenyun.casdoor.client.service;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.yicenyun.casdoor.client.entity.CasdoorOrganization;
 import com.yicenyun.casdoor.client.response.CasdoorResponse;
@@ -15,7 +15,7 @@ import com.yicenyun.casdoor.client.support.ServiceTestSupport;
 public class CasdoorOrganizationServiceTest extends ServiceTestSupport {
     private CasdoorOrganizationService subject;
 
-    @Before
+    @BeforeEach
     public void init() {
         subject = createService(CasdoorOrganizationService.class);
     }

@@ -1,11 +1,13 @@
 package com.yicenyun.casdoor.client.e2e;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.io.IOException;
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.yicenyun.casdoor.client.CasdoorClient;
 import com.yicenyun.casdoor.client.command.QueryCommand;
@@ -18,7 +20,7 @@ public class CasdoorGroupServiceTest {
     private CasdoorClient client = CasdoorClientProvider.get();
     private CasdoorGroupService subject;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         subject = client.createService(CasdoorGroupService.class);
     }
@@ -26,13 +28,13 @@ public class CasdoorGroupServiceTest {
     @Test
     public void testGetGroup() throws Exception {
         CasdoorGroup group = subject.getGroup("test-group").execute().body().getData();
-        Assert.assertNotNull(group);
+        assertNotNull(group);
     }
 
     @Test
     public void testGetGroups() throws Exception {
         List<CasdoorGroup> groups = subject.getGroups().execute().body().getData();
-        Assert.assertNotNull(groups);
+        assertNotNull(groups);
     }
 
     @Test
@@ -40,7 +42,7 @@ public class CasdoorGroupServiceTest {
         QueryCommand command = new QueryCommand.Builder().page(1, 15).build();
         List<CasdoorGroup> groups = subject.getGroups(command, false)
                 .execute().body().getData();
-        Assert.assertNotNull(groups);
+        assertNotNull(groups);
     }
 
     @Test
@@ -49,20 +51,20 @@ public class CasdoorGroupServiceTest {
         group.setOwner("built-in");
         group.setName("test-modify-group");
         CasdoorActionResponse response = subject.addGroup(group).execute().body();
-        Assert.assertEquals("ok", response.getStatus());
-        Assert.assertEquals("Affected", response.getData());
+        assertEquals("ok", response.getStatus());
+        assertEquals("Affected", response.getData());
 
         CasdoorGroup created = subject.getGroup("test-modify-group").execute().body().getData();
 
         created.setDisplayName("test-display-name");
         response = subject.updateGroup("test-modify-group",
                 created).execute().body();
-        Assert.assertEquals("ok", response.getStatus());
-        Assert.assertEquals("Affected", response.getData());
+        assertEquals("ok", response.getStatus());
+        assertEquals("Affected", response.getData());
 
         response = subject.deleteGroup(created).execute().body();
-        Assert.assertEquals("ok", response.getStatus());
-        Assert.assertEquals("Affected", response.getData());
+        assertEquals("ok", response.getStatus());
+        assertEquals("Affected", response.getData());
     }
 
 }

@@ -1,11 +1,11 @@
 package com.yicenyun.casdoor.client.e2e;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.yicenyun.casdoor.client.service.CasdoorEnforcerService;
 

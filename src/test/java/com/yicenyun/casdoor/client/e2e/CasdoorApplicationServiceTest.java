@@ -1,11 +1,13 @@
 package com.yicenyun.casdoor.client.e2e;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.io.IOException;
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.yicenyun.casdoor.client.CasdoorClient;
 import com.yicenyun.casdoor.client.command.QueryCommand;
@@ -18,7 +20,7 @@ public class CasdoorApplicationServiceTest {
     private CasdoorClient client = CasdoorClientProvider.get();
     private CasdoorApplicationService subject;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         subject = client.createService(CasdoorApplicationService.class);
     }
@@ -26,7 +28,7 @@ public class CasdoorApplicationServiceTest {
     @Test
     public void testGetApplications() throws Exception {
         List<CasdoorApplication> applications = subject.getApplications().execute().body().getData();
-        Assert.assertNotNull(applications);
+        assertNotNull(applications);
     }
 
     @Test
@@ -34,7 +36,7 @@ public class CasdoorApplicationServiceTest {
         QueryCommand command = new QueryCommand.Builder().page(1, 15).build();
         List<CasdoorApplication> applications = subject.getApplications(command)
                 .execute().body().getData();
-        Assert.assertNotNull(applications);
+        assertNotNull(applications);
     }
 
     @Test
@@ -43,20 +45,20 @@ public class CasdoorApplicationServiceTest {
         application.setOwner("admin");
         application.setName("test-modify-application");
         CasdoorActionResponse response = subject.addApplication(application).execute().body();
-        Assert.assertEquals("ok", response.getStatus());
-        Assert.assertEquals("Affected", response.getData());
+        assertEquals("ok", response.getStatus());
+        assertEquals("Affected", response.getData());
 
         CasdoorApplication created = subject.getApplication("admin/test-modify-application").execute().body().getData();
 
         created.setDisplayName("test-display-name");
         response = subject.updateApplication("admin/test-modify-application",
                 created).execute().body();
-        Assert.assertEquals("ok", response.getStatus());
-        Assert.assertEquals("Affected", response.getData());
+        assertEquals("ok", response.getStatus());
+        assertEquals("Affected", response.getData());
 
         response = subject.deleteApplication(created).execute().body();
-        Assert.assertEquals("ok", response.getStatus());
-        Assert.assertEquals("Affected", response.getData());
+        assertEquals("ok", response.getStatus());
+        assertEquals("Affected", response.getData());
     }
 
 }

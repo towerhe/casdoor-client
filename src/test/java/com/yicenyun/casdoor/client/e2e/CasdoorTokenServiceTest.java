@@ -1,14 +1,14 @@
 package com.yicenyun.casdoor.client.e2e;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.yicenyun.casdoor.client.CasdoorClient;
 import com.yicenyun.casdoor.client.command.QueryCommand;
@@ -22,7 +22,7 @@ public class CasdoorTokenServiceTest {
     private CasdoorClient client = CasdoorClientProvider.get();
     private CasdoorTokenService subject;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         subject = client.createService(CasdoorTokenService.class);
     }
@@ -46,8 +46,8 @@ public class CasdoorTokenServiceTest {
         token.setName("test-delete-token");
         token.setOwner("admin");
         CasdoorActionResponse response = subject.deleteToken(token).execute().body();
-        Assert.assertEquals("ok", response.getStatus());
-        Assert.assertEquals("Affected", response.getData());
+        assertEquals("ok", response.getStatus());
+        assertEquals("Affected", response.getData());
     }
 
     @Test

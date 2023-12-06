@@ -3,26 +3,26 @@ package com.yicenyun.casdoor.client.support;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import com.yicenyun.casdoor.client.CasdoorClient;
 
-import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.MockWebServer;
+import mockwebserver3.MockResponse;
+import mockwebserver3.MockWebServer;
 
 public abstract class ServiceTestSupport {
 
     private MockWebServer server = new MockWebServer();
     private CasdoorClient client;
 
-    @Before
+    @BeforeEach
     public void setUp() throws IOException {
         server.start();
         client = CasdoorClientProvider.get(server.url("/").toString());
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws IOException {
         server.shutdown();
     }
