@@ -91,18 +91,18 @@ public class CasdoorAuthService extends CasdoorService {
             throw new CasdoorAuthException("Cannot verify signature.", e);
         }
 
-        // read "access_token" from payload and convert to CasdoorUser
+        // read "user" from payload and convert to CasdoorUser
         try {
             JWTClaimsSet claimsSet = parseJwt.getJWTClaimsSet();
-            String accessToken = claimsSet.getStringClaim("access_token");
+            String userJson = claimsSet == null ? null : claimsSet.toString();
 
-            if (accessToken == null || accessToken.isEmpty()) {
-                throw new CasdoorAuthException("Access token not found in JWT payload.");
+            if (userJson == null || userJson.isEmpty()) {
+                throw new CasdoorAuthException("Cannot get claims from JWT payload");
             }
 
-            return objectMapper.readValue(claimsSet.toString(), CasdoorUser.class);
+            return objectMapper.readValue(userJson, CasdoorUser.class);
         } catch (JsonProcessingException | java.text.ParseException e) {
-            throw new CasdoorAuthException("Cannot read access token from JWT payload.", e);
+            throw new CasdoorAuthException("Cannot convert claims to User", e);
         }
     }
 
