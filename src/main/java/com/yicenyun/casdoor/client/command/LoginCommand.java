@@ -11,9 +11,10 @@ public class LoginCommand {
     private String captchaType;
     private String captchaToken;
     private String clientSecret;
+    private Boolean autoSignin;
 
     LoginCommand(ResponseType type, String username, String password, String organization, String application, String captchaType,
-            String captchaToken, String clientSecret) {
+            String captchaToken, String clientSecret, Boolean autoSignin) {
         this.type = type.getValue();
         this.username = username;
         this.password = password;
@@ -22,6 +23,7 @@ public class LoginCommand {
         this.captchaType = captchaType;
         this.captchaToken = captchaToken;
         this.clientSecret = clientSecret;
+        this.autoSignin = autoSignin;
     }
 
     public String getType() {
@@ -56,6 +58,10 @@ public class LoginCommand {
         return clientSecret;
     }
 
+    public Boolean getAutoSignin() {
+        return autoSignin;
+    }
+
     public static class Builder {
         private ResponseType type;
         private String username;
@@ -65,6 +71,7 @@ public class LoginCommand {
         private String captchaType;
         private String captchaToken;
         private String clientSecret;
+        private Boolean autoSignin;
 
         public Builder type(ResponseType type) {
             this.type = type;
@@ -106,9 +113,14 @@ public class LoginCommand {
             return this;
         }
 
+        public Builder autoSignin(Boolean autoSignin) {
+            this.autoSignin = autoSignin;
+            return this;
+        }
+
         public LoginCommand build() {
             return new LoginCommand(type, username, password, organization, application, captchaType, captchaToken,
-                    clientSecret);
+                    clientSecret, autoSignin);
         }
     }
 }

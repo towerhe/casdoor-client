@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import com.yicenyun.casdoor.client.CasdoorClient;
 import com.yicenyun.casdoor.client.command.LoginCommand;
 import com.yicenyun.casdoor.client.command.LoginQueryParams;
-import com.yicenyun.casdoor.client.command.LogoutQueryParams;
 import com.yicenyun.casdoor.client.command.LoginQueryParams.ResponseType;
 import com.yicenyun.casdoor.client.config.CasdoorConfig;
 import com.yicenyun.casdoor.client.entity.CasdoorMfa;
@@ -41,6 +40,7 @@ class CasdoorLoginServiceTest {
                 .state(config.getApplicationName()).build();
         LoginCommand command = new LoginCommand.Builder().type(ResponseType.CODE).username("towerhe")
                 .password("towerhe").application(config.getApplicationName()).organization(config.getOrganizationName())
+                .autoSignin(true)
                 .build();
 
         /* When */
@@ -53,9 +53,7 @@ class CasdoorLoginServiceTest {
         String token = client.createService(CasdoorAuthService.class).getOAuthToken(response.getData(),
                 config.getApplicationName());
         /* When */
-        CasdoorActionResponse response2 = subject.logout(
-                new LogoutQueryParams.Builder().idTokenHint(token).state(config.getApplicationName()).build().toMap())
-                .execute().body();
+        CasdoorActionResponse response2 = subject.logout(token).execute().body();
         /* Then */
         assertEquals("ok", response2.getStatus());
     }
